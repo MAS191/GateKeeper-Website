@@ -1,5 +1,4 @@
 name = "gatekeeper-website"
-main = "src/index.ts"
 compatibility_date = "2026-05-01"
 
 [assets]
