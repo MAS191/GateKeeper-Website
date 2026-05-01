@@ -1,15 +1,255 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Source Sans 3", "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  height: 100%;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  @apply text-white antialiased;
+  background-color: #0a0f1c;
+  background-image: radial-gradient(
+      1000px 600px at 12% -10%,
+      rgba(45, 212, 191, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 85% 8%,
+      rgba(96, 165, 250, 0.22),
+      transparent 58%
+    ),
+    radial-gradient(
+      800px 600px at 50% 100%,
+      rgba(251, 191, 36, 0.16),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(8, 12, 22, 0.98), rgba(6, 9, 18, 0.98));
+  font-family: var(--font-sans);
+}
+
+:root[data-theme="light"] body {
+  @apply text-slate-900;
+  background-color: #f6f8fb;
+  background-image: radial-gradient(
+      900px 600px at 10% 0%,
+      rgba(45, 212, 191, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 88% 5%,
+      rgba(96, 165, 250, 0.2),
+      transparent 58%
+    ),
+    radial-gradient(
+      800px 520px at 50% 100%,
+      rgba(251, 191, 36, 0.14),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(241, 245, 249, 0.96));
+}
+
+.page-shell {
+  position: relative;
+  min-height: 100vh;
+  background: transparent;
+  overflow: hidden;
+}
+
+.page-shell::before {
+  content: "";
+  position: absolute;
+  inset: -10% -5% auto -5%;
+  height: 65%;
+  background: radial-gradient(
+      40% 45% at 15% 15%,
+      rgba(45, 212, 191, 0.22),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 45% at 85% 10%,
+      rgba(96, 165, 250, 0.2),
+      transparent 70%
+    );
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+  background-size: 90px 90px;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.logo-mark {
+  @apply absolute left-0 top-0 h-10 w-10 rounded-2xl border border-white/10 bg-black/40 p-1;
+}
+
+.logo-mark--light {
+  display: none;
+}
+
+.screenshot-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screenshot-light {
+  display: none;
+}
+
+:root[data-theme="light"] .logo-mark {
+  @apply border-slate-200/70 bg-white/80;
+}
+
+:root[data-theme="light"] .logo-mark--dark {
+  display: none;
+}
+
+:root[data-theme="light"] .logo-mark--light {
+  display: block;
+}
+
+:root[data-theme="light"] .screenshot-dark {
+  display: none;
+}
+
+:root[data-theme="light"] .screenshot-light {
+  display: block;
+}
+
+:root[data-theme="light"] .page-shell::before {
+  background: radial-gradient(
+      40% 45% at 10% 10%,
+      rgba(45, 212, 191, 0.18),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 45% at 90% 5%,
+      rgba(96, 165, 250, 0.18),
+      transparent 70%
+    );
+}
+
+:root[data-theme="light"] .page-shell::after {
+  background-image: linear-gradient(
+      0deg,
+      rgba(15, 23, 42, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.06) 1px,
+      transparent 1px
+    );
+  opacity: 0.18;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.fade-up {
+  animation: rise 700ms ease-out both;
+}
+
+.delay-1 {
+  animation-delay: 120ms;
+}
+
+.delay-2 {
+  animation-delay: 240ms;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glass-panel {
+  @apply border border-white/10 bg-slate-950/60 backdrop-blur-xl;
+  box-shadow: 0 24px 60px rgba(3, 7, 18, 0.55);
+}
+
+.glass-card {
+  @apply border border-white/10 bg-slate-950/40 backdrop-blur-lg;
+  box-shadow: 0 18px 40px rgba(3, 7, 18, 0.4);
+}
+
+.glass-input {
+  @apply rounded-2xl border border-white/10 bg-slate-950/50 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-400/70 focus:ring-1 focus:ring-emerald-400/40;
+}
+
+:root[data-theme="light"] .glass-panel {
+  @apply border border-slate-200/70 bg-white/80;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .glass-card {
+  @apply border border-slate-200/70 bg-white/70;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .glass-input {
+  @apply border border-slate-200/70 bg-white text-slate-900 focus:border-emerald-500/60 focus:ring-emerald-500/30;
+}
+
+:root[data-theme="light"] [class~="text-white"],
+:root[data-theme="light"] [class~="text-white/70"],
+:root[data-theme="light"] [class~="text-white/60"],
+:root[data-theme="light"] [class~="text-white/50"],
+:root[data-theme="light"] [class~="text-white/80"] {
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] [class~="text-white/70"],
+:root[data-theme="light"] [class~="text-white/60"],
+:root[data-theme="light"] [class~="text-white/50"] {
+  color: #334155 !important;
+}
+
+:root[data-theme="light"] [class*="border-white/"] {
+  border-color: rgba(148, 163, 184, 0.4) !important;
+}
+
+:root[data-theme="light"] [class*="bg-white/10"],
+:root[data-theme="light"] [class*="bg-white/5"],
+:root[data-theme="light"] [class*="bg-black/30"],
+:root[data-theme="light"] [class*="bg-black/40"],
+:root[data-theme="light"] [class*="bg-black/50"] {
+  background-color: rgba(255, 255, 255, 0.65) !important;
 }
