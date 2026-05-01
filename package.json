@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && rm -rf dist && cp -R build/client dist && node scripts/generate-static-index.mjs",
     "dev": "react-router dev",
     "start": "npm run build && react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
