@@ -55,15 +55,23 @@ export default function Home() {
             </Link>
           </div>
           <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/50">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-              Windows
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-              Linux
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-              Android
-            </span>
+            {[
+              { name: "Windows", src: "/windows.png" },
+              { name: "Linux", src: "/linux.png" },
+              { name: "Android", src: "/android.png" },
+            ].map((platform) => (
+              <span
+                key={platform.name}
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5"
+              >
+                <img
+                  src={platform.src}
+                  alt={`${platform.name} logo`}
+                  className="h-4 w-4 object-contain"
+                />
+                {platform.name}
+              </span>
+            ))}
           </div>
         </div>
         <div className="glass-panel rounded-3xl p-6 fade-up delay-1">
@@ -170,50 +178,27 @@ export default function Home() {
             {
               title: "Windows",
               body: "AppGate, NetGate, and WebGate plus Windows-only Sandbox isolation.",
-              icon: (
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="h-6 w-6 text-emerald-300"
-                  fill="currentColor"
-                >
-                  <path d="M2 4.8 11 3v8H2V4.8Zm11 15.2-11-1.8V12h9v8Zm0-17 9-1.2V11h-9V3Zm9 18-9-1.4V12h9v9Z" />
-                </svg>
-              ),
+              icon: "/windows.png",
             },
             {
               title: "Linux",
               body: "NetGate controls with AI assistant and dashboard visibility.",
-              icon: (
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="h-6 w-6 text-emerald-300"
-                  fill="currentColor"
-                >
-                  <path d="M12 2c2.6 0 4.7 3.1 4.7 6.9 0 2.4-.7 4.6-1.9 5.9.7.5 1.2 1.3 1.2 2.3 0 1.6-1.3 2.9-2.9 2.9-.7 0-1.3-.2-1.8-.6-.5.4-1.1.6-1.8.6-1.6 0-2.9-1.3-2.9-2.9 0-1 .5-1.8 1.2-2.3-1.2-1.3-1.9-3.5-1.9-5.9C7.3 5.1 9.4 2 12 2Z" />
-                </svg>
-              ),
+              icon: "/linux.png",
             },
             {
               title: "Android",
               body: "AppGate, WebGate, and hardware permission management.",
-              icon: (
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="h-6 w-6 text-emerald-300"
-                  fill="currentColor"
-                >
-                  <path d="M8.3 4.4 7 2.5l.9-.5 1.4 2.1a6.7 6.7 0 0 1 5.4 0l1.4-2.1.9.5-1.3 1.9A6.8 6.8 0 0 1 19 9.8V18a2 2 0 0 1-2 2h-1v2h-2v-2h-4v2H8v-2H7a2 2 0 0 1-2-2V9.8a6.8 6.8 0 0 1 3.3-5.4ZM7 9.8V18h10V9.8H7Z" />
-                </svg>
-              ),
+              icon: "/android.png",
             },
           ].map((card) => (
             <div key={card.title} className="glass-card rounded-3xl p-6">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                  {card.icon}
+                  <img
+                    src={card.icon}
+                    alt={`${card.title} logo`}
+                    className="h-6 w-6 object-contain"
+                  />
                 </div>
                 <h3 className="text-lg font-semibold text-white">
                   {card.title}

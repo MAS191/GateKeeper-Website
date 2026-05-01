@@ -148,15 +148,23 @@ export default function Features() {
             then unifies them inside a single operations dashboard.
           </p>
           <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-              Windows
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-              Linux
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-              Android
-            </span>
+            {[
+              { name: "Windows", src: "/windows.png" },
+              { name: "Linux", src: "/linux.png" },
+              { name: "Android", src: "/android.png" },
+            ].map((platform) => (
+              <span
+                key={platform.name}
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5"
+              >
+                <img
+                  src={platform.src}
+                  alt={`${platform.name} logo`}
+                  className="h-4 w-4 object-contain"
+                />
+                {platform.name}
+              </span>
+            ))}
           </div>
         </div>
         <div className="glass-panel rounded-3xl p-6 fade-up delay-1">
@@ -271,9 +279,18 @@ export default function Features() {
         <div className="grid gap-6 md:grid-cols-3">
           {platformColumns.map((platform) => (
             <div key={platform.title} className="glass-card rounded-3xl p-6">
-              <h3 className="text-lg font-semibold text-white">
-                {platform.title}
-              </h3>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                  <img
+                    src={`/${platform.title.toLowerCase()}.png`}
+                    alt={`${platform.title} logo`}
+                    className="h-6 w-6 object-contain"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-white">
+                  {platform.title}
+                </h3>
+              </div>
               <p className="mt-3 text-sm text-white/70">
                 {platform.summary}
               </p>
