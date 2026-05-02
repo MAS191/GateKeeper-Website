@@ -29,6 +29,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState("dark");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem("gk-theme");
@@ -56,6 +57,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        {/* Skip to main content link */}
+        <a
+          href="#main"
+          className="absolute left-[-9999px] focus:relative focus:left-0 focus:top-0 focus:z-50 bg-emerald-400 text-slate-950 px-4 py-2 font-semibold rounded-b"
+        >
+          Skip to main content
+        </a>
         <div className="page-shell">
           <div className="relative z-10 flex min-h-screen flex-col">
             <header className="border-b border-white/5 bg-slate-950/60 backdrop-blur-md">
@@ -82,7 +90,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     </p>
                   </div>
                 </div>
-                <nav className="hidden items-center gap-2 text-sm font-semibold md:flex">
+                <nav className="hidden items-center gap-2 text-sm font-semibold md:flex" aria-label="Main navigation">
                   <NavLink
                     to="/"
                     end
@@ -133,11 +141,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     Contact
                   </NavLink>
                 </nav>
-                <div className="flex items-center gap-3">
+
+                {/* Mobile menu button */}
+                <button
+                  className="md:hidden rounded-full border border-white/15 bg-white/5 px-3 py-2 text-white transition hover:border-white/30"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  aria-label="Toggle navigation menu"
+                  aria-expanded={mobileMenuOpen}
+                >
+                  ☰
+                </button>
+
+                <div className="hidden md:flex items-center gap-3">
                   <button
                     type="button"
                     onClick={toggleTheme}
                     className="rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/70 transition hover:border-white/30 hover:text-white"
+                    aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
                   >
                     {theme === "dark" ? "Light" : "Dark"}
                   </button>
@@ -149,8 +169,87 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   </NavLink>
                 </div>
               </div>
+
+              {/* Mobile navigation menu */}
+              {mobileMenuOpen && (
+                <nav className="border-t border-white/5 bg-slate-950/40 px-6 py-4 md:hidden space-y-2" aria-label="Mobile navigation">
+                  <NavLink
+                    to="/"
+                    end
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block rounded-full px-3 py-2 transition ${
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-white/60 hover:text-white"
+                      }`
+                    }
+                  >
+                    Home
+                  </NavLink>
+                  <NavLink
+                    to="/features"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block rounded-full px-3 py-2 transition ${
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-white/60 hover:text-white"
+                      }`
+                    }
+                  >
+                    Features
+                  </NavLink>
+                  <NavLink
+                    to="/pricing"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block rounded-full px-3 py-2 transition ${
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-white/60 hover:text-white"
+                      }`
+                    }
+                  >
+                    Pricing
+                  </NavLink>
+                  <NavLink
+                    to="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block rounded-full px-3 py-2 transition ${
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-white/60 hover:text-white"
+                      }`
+                    }
+                  >
+                    Contact
+                  </NavLink>
+                  <div className="flex items-center gap-2 pt-2 mt-2 border-t border-white/5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        toggleTheme();
+                        setMobileMenuOpen(false);
+                      }}
+                      className="flex-1 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/70 transition hover:border-white/30 hover:text-white"
+                      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+                    >
+                      {theme === "dark" ? "Light" : "Dark"}
+                    </button>
+                    <NavLink
+                      to="/contact"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex-1 text-center rounded-full bg-emerald-400 px-3 py-2 text-xs font-semibold text-slate-950 shadow-sm transition hover:bg-emerald-300"
+                    >
+                      Talk to us
+                    </NavLink>
+                  </div>
+                </nav>
+              )}
             </header>
-            <main className="flex-1">
+            <main id="main" className="flex-1">
               <div className="mx-auto w-full max-w-6xl px-6 pb-20 pt-10">
                 {children}
               </div>

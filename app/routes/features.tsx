@@ -9,6 +9,10 @@ export function meta({}: Route.MetaArgs) {
       content:
         "Explore GateKeeper modules for AppGate, NetGate, WebGate, AI assistance, and cross-platform controls.",
     },
+    { property: "og:title", content: "GateKeeper | Features" },
+    { property: "og:description", content: "Explore GateKeeper modules for AppGate, NetGate, WebGate, AI assistance, and cross-platform controls." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
   ];
 }
 
@@ -246,11 +250,17 @@ export default function Features() {
                       src={module.screenshotDark}
                       alt={`${module.title} screenshot in dark mode`}
                       className="screenshot-image screenshot-dark"
+                      loading="lazy"
+                      width={1200}
+                      height={800}
                     />
                     <img
                       src={module.screenshotLight}
                       alt={`${module.title} screenshot in light mode`}
                       className="screenshot-image screenshot-light"
+                      loading="lazy"
+                      width={1200}
+                      height={800}
                     />
                   </div>
                 </div>

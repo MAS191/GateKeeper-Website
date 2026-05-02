@@ -9,52 +9,70 @@ export function meta({}: Route.MetaArgs) {
       content:
         "GateKeeper secures Windows, Linux, and Android with AppGate, NetGate, and WebGate plus an AI assistant and unified dashboard.",
     },
+    { property: "og:title", content: "GateKeeper | Cross-platform security" },
+    { property: "og:description", content: "Unified endpoint, network, and DNS protection for Windows, Linux, and Android teams." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
   ];
 }
 
 export default function Home() {
   return (
     <div className="space-y-24">
+      {/* Enhanced Hero Section */}
       <section className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="space-y-6 fade-up">
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-200">
-            Operations-grade security
-          </span>
-          <h1 className="font-display text-5xl leading-tight text-white md:text-6xl">
-            GateKeeper
+          <div className="inline-flex">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-200 slide-in">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Operations-grade security
+            </span>
+          </div>
+          <h1 className="font-display text-5xl leading-tight text-white md:text-6xl fade-up delay-1">
+            Unified Security
+            <br />
+            <span className="bg-gradient-to-r from-emerald-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
+              Across All Platforms
+            </span>
           </h1>
-          <p className="max-w-2xl text-lg text-white/70">
-            Unified endpoint, network, and DNS protection for Windows, Linux,
-            and Android teams.
+          <p className="max-w-2xl text-lg text-white/70 fade-up delay-2">
+            GateKeeper delivers endpoint, network, and DNS protection with AI-powered policy automation and a unified command center for Windows, Linux, and Android teams.
           </p>
-          <div className="grid gap-3 text-sm text-white/70 sm:grid-cols-2">
+          
+          {/* Enhanced Feature List */}
+          <div className="grid gap-3 text-sm text-white/70 sm:grid-cols-2 fade-up delay-2">
             {[
-              "Per-app controls with audit-ready workflows",
-              "Threat intelligence mapped to network rules",
-              "DNS protection that spans every browser",
-              "Live telemetry and incident visibility",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                <span>{item}</span>
+              { icon: "🔒", text: "Per-app controls with audit-ready workflows" },
+              { icon: "🎯", text: "Threat intelligence mapped to network rules" },
+              { icon: "🌐", text: "DNS protection that spans every browser" },
+              { icon: "📊", text: "Live telemetry and incident visibility" },
+            ].map((item, idx) => (
+              <div key={item.text} className={`fade-up delay-${idx + 3} flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition`}>
+                <span className="text-lg">{item.icon}</span>
+                <span>{item.text}</span>
               </div>
             ))}
           </div>
-          <div className="flex flex-wrap items-center gap-4">
+          
+          {/* CTAs */}
+          <div className="flex flex-wrap items-center gap-4 pt-2 fade-up delay-4">
             <Link
               to="/contact"
-              className="rounded-full bg-emerald-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-300"
+              className="group rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-7 py-3.5 text-sm font-semibold text-slate-950 shadow-lg transition hover:shadow-emerald-400/50 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0"
             >
               Book a demo
             </Link>
             <Link
               to="/features"
-              className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white"
+              className="group rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-emerald-400/50 hover:bg-emerald-400/10 hover:text-emerald-300"
             >
-              Explore features
+              Explore features →
             </Link>
           </div>
-          <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/50">
+          
+          {/* Platform Badges */}
+          <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 pt-4">
+            <span className="text-white/40">Ships for:</span>
             {[
               { name: "Windows", src: "/windows.png" },
               { name: "Linux", src: "/linux.png" },
@@ -62,7 +80,7 @@ export default function Home() {
             ].map((platform) => (
               <span
                 key={platform.name}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5"
+                className="flex items-center gap-2 rounded-full border border-white/15 bg-gradient-to-r from-white/5 to-transparent px-3 py-1.5 hover:border-white/30 transition"
               >
                 <img
                   src={platform.src}
@@ -86,11 +104,17 @@ export default function Home() {
               src="/screenshots/Dashboard-Dark.png"
               alt="GateKeeper command center dashboard in dark mode"
               className="screenshot-image screenshot-dark"
+              loading="lazy"
+              width={1200}
+              height={800}
             />
             <img
               src="/screenshots/Dashboard-Light.png"
               alt="GateKeeper command center dashboard in light mode"
               className="screenshot-image screenshot-light"
+              loading="lazy"
+              width={1200}
+              height={800}
             />
           </div>
           <div className="mt-5 grid gap-4 text-xs text-white/60 sm:grid-cols-3">
