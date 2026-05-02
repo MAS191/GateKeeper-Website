@@ -1,5 +1,4 @@
 import type { Route } from "./+types/contact";
-import { Form, useActionData, useNavigation } from "react-router";
 import { useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
@@ -15,48 +14,56 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export const action: Route.Action = async ({ request }) => {
-  if (request.method !== "POST") return null;
-
-  try {
-    const formData = await request.formData();
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const company = formData.get("company");
-    const endpointCount = formData.get("endpoint-count");
-    const message = formData.get("message");
-
-    // Validate required fields
-    if (!name || !email || !company) {
-      return { error: "Please fill in all required fields." };
-    }
-
-    // Validate email format
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email as string)) {
-      return { error: "Please enter a valid email address." };
-    }
-
-    // Send to webhook (replace with your actual endpoint)
-    const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
-    if (webhookUrl) {
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, company, endpointCount, message, timestamp: new Date().toISOString() }),
-      });
-    }
-
-    return { success: true };
-  } catch (error) {
-    return { error: "Failed to submit form. Please try again." };
-  }
-};
-
 export default function Contact() {
-  const result = useActionData<typeof action>();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrors({});
+    setResult(null);
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const name = formData.get("name") as string;
+      const email = formData.get("email") as string;
+      const company = formData.get("company") as string;
+      const endpointCount = formData.get("endpoint-count") as string;
+      const message = formData.get("message") as string;
+
+      // Client-side validation
+      const newErrors: Record<string, string> = {};
+      if (!name?.trim()) newErrors.name = "Name is required";
+      if (!email?.trim()) newErrors.email = "Email is required";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = "Invalid email format";
+      if (!company?.trim()) newErrors.company = "Company is required";
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Submit to webhook or external service
+      const webhookUrl = import.meta.env.VITE_CONTACT_WEBHOOK_URL;
+      if (webhookUrl) {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, company, endpointCount, message, timestamp: new Date().toISOString() }),
+        });
+      }
+
+      setResult({ success: true });
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      setResult({ error: "Failed to submit form. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="space-y-20">
       {/* Header */}
@@ -145,7 +152,7 @@ export default function Contact() {
             </div>
           )}
 
-          <Form method="post" className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               <label htmlFor="name" className="text-sm text-white/70 font-medium">
                 Full name *
@@ -245,7 +252,7 @@ export default function Contact() {
             <p className="text-xs text-white/60 text-center">
               By submitting, you agree to be contacted about GateKeeper updates.
             </p>
-          </Form>
+          </form>
         </section>
       </div>
     </div>
