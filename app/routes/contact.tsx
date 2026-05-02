@@ -104,7 +104,7 @@ export default function Contact() {
         {/* Side info */}
         <aside className="space-y-6 reveal reveal-1">
           <div className="glass-card p-6">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)] border-b border-white/10 pb-3 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary border-b border-white/10 pb-3 mb-4">
               Office hours
             </p>
             <dl className="space-y-3 text-sm">
@@ -124,7 +124,7 @@ export default function Contact() {
           </div>
 
           <div className="glass-card p-6">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)] border-b border-white/10 pb-3 mb-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary border-b border-white/10 pb-3 mb-4">
               What to expect
             </p>
             <ol className="space-y-3 text-sm text-white/70">
@@ -134,7 +134,7 @@ export default function Contact() {
                 "From there we plan the pilot together",
               ].map((step, idx) => (
                 <li key={step} className="flex gap-3">
-                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[hsl(180_100%_50%)]/15 text-xs font-semibold text-[hsl(180_100%_50%)]">
+                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
                     {idx + 1}
                   </span>
                   <span>{step}</span>
@@ -146,7 +146,7 @@ export default function Contact() {
 
         {/* Form */}
         <section className="glass-panel p-6 md:p-8 reveal reveal-2">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)] border-b border-white/10 pb-4 mb-6">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary border-b border-white/10 pb-4 mb-6">
             Message
           </p>
 
@@ -164,7 +164,7 @@ export default function Contact() {
           )}
 
           {result?.success && (
-            <div className="mt-6 rounded-lg border border-[hsl(180_100%_50%)]/40 bg-[hsl(180_100%_50%)]/10 px-4 py-3 text-sm text-[hsl(180_100%_50%)]">
+            <div className="mt-6 rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-primary">
               Message received. We'll be in touch.
             </div>
           )}
@@ -283,7 +283,7 @@ function Field({
       >
         <span>{label}</span>
         {required ? (
-          <span className="text-xs text-[hsl(180_100%_50%)]">required</span>
+          <span className="text-xs text-primary">required</span>
         ) : (
           <span className="text-xs text-white/40">optional</span>
         )}

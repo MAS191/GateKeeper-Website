@@ -282,7 +282,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     <li>
                       <NavLink
                         to="/features"
-                        className="hover:text-[hsl(180_100%_50%)] transition-colors"
+                        className="hover:text-primary transition-colors"
                       >
                         Features
                       </NavLink>
@@ -290,7 +290,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     <li>
                       <NavLink
                         to="/contact"
-                        className="hover:text-[hsl(180_100%_50%)] transition-colors"
+                        className="hover:text-primary transition-colors"
                       >
                         Contact
                       </NavLink>
@@ -305,15 +305,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <ul className="space-y-1.5 text-sm text-white/70">
                     <li className="flex items-center justify-between gap-3">
                       <span>Windows</span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--color-primary)]" />
                     </li>
                     <li className="flex items-center justify-between gap-3">
                       <span>Linux</span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--color-primary)]" />
                     </li>
                     <li className="flex items-center justify-between gap-3">
                       <span>Android</span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--color-primary)]" />
                     </li>
                   </ul>
                 </div>

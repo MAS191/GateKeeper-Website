@@ -181,7 +181,7 @@ export default function Features() {
         <div className="reveal reveal-1 glass-panel overflow-hidden">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5 text-xs text-white/60">
             <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--color-primary)]" />
               Command center
             </span>
             <span className="text-white/40">Preview</span>
@@ -206,7 +206,7 @@ export default function Features() {
       {/* ── MODULES IN DEPTH ──────────────────────────────── */}
       <section className="space-y-10">
         <div className="border-t border-white/10 pt-10 space-y-3 max-w-3xl">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
             Modules
           </p>
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
@@ -229,7 +229,7 @@ export default function Features() {
                 <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
                   <div className={`space-y-5 ${isReversed ? "lg:order-2" : ""}`}>
                     <div className="flex items-center gap-3 flex-wrap">
-                      <span className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+                      <span className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
                         {module.kicker}
                       </span>
                       <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-white/60">
@@ -248,7 +248,7 @@ export default function Features() {
                           key={item}
                           className="flex items-start gap-3 text-sm text-white/70"
                         >
-                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary shadow-[0_0_6px_var(--color-primary)]" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -261,7 +261,7 @@ export default function Features() {
                   >
                     <div className="border-b border-white/10 px-3 py-2 flex items-center justify-between text-[11px] text-white/50">
                       <span>{module.title}</span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_6px_var(--color-primary)]" />
                     </div>
                     <img
                       src={module.screenshotDark}
@@ -290,7 +290,7 @@ export default function Features() {
       {/* ── PLATFORM ROLLOUTS ─────────────────────────────── */}
       <section>
         <div className="border-t border-white/10 pt-10 space-y-3 max-w-3xl">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
             Platforms
           </p>
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
@@ -322,7 +322,7 @@ export default function Features() {
                     key={item}
                     className="flex items-start gap-3 text-sm text-white/70"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary shadow-[0_0_6px_var(--color-primary)]" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -344,7 +344,7 @@ export default function Features() {
         />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
               Walkthrough
             </p>
             <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">

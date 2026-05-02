@@ -123,7 +123,7 @@ export default function Home() {
         <div className="reveal reveal-2 glass-panel overflow-hidden">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5 text-xs text-white/60">
             <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--color-primary)]" />
               Command center
             </span>
             <span className="text-white/40">Preview</span>
@@ -169,7 +169,7 @@ export default function Home() {
               <h3 className="text-2xl font-semibold tracking-tight">
                 {m.title}
               </h3>
-              <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-[hsl(180_100%_50%)]">
+              <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-primary">
                 {m.scope}
               </p>
               <p className="mt-4 text-sm text-white/70 leading-relaxed">
@@ -215,7 +215,7 @@ export default function Home() {
         />
         <div className="grid gap-6 lg:grid-cols-2 mt-12">
           <article className="glass-panel p-8">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
               AI assistant
             </p>
             <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight leading-tight">
@@ -236,7 +236,7 @@ export default function Home() {
                   key={item}
                   className="flex items-start gap-3 text-sm text-white/70"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary shadow-[0_0_6px_var(--color-primary)]" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -244,7 +244,7 @@ export default function Home() {
           </article>
 
           <article className="glass-panel p-8">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(270_100%_70%)]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-secondary">
               Dashboard &amp; NetWatch
             </p>
             <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight leading-tight">
@@ -265,7 +265,7 @@ export default function Home() {
                   key={label}
                   className="flex items-start gap-3 text-sm text-white/70"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[hsl(270_100%_70%)] shadow-[0_0_6px_hsl(270_100%_70%)]" />
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-secondary shadow-[0_0_6px_var(--color-secondary)]" />
                   <span>{label}</span>
                 </li>
               ))}
@@ -286,7 +286,7 @@ export default function Home() {
         />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
               Architecture
             </p>
             <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
@@ -318,7 +318,7 @@ function SectionHeader({
 }) {
   return (
     <div className="border-t border-white/10 pt-10 space-y-3 max-w-3xl">
-      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
         {eyebrow}
       </p>
       <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
