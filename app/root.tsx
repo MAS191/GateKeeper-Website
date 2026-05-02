@@ -21,7 +21,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
   },
   { rel: "icon", href: "/icon.png" },
   { rel: "apple-touch-icon", href: "/icon.png" },
@@ -38,16 +38,16 @@ const NAV_ITEMS: readonly NavItem[] = [
 function MenuIcon() {
   return (
     <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.75"
-      strokeLinecap="square"
+      strokeLinecap="round"
       aria-hidden
     >
-      <path d="M2 5h14M2 9h14M2 13h14" />
+      <path d="M3 6h14M3 10h14M3 14h14" />
     </svg>
   );
 }
@@ -55,16 +55,16 @@ function MenuIcon() {
 function CloseIcon() {
   return (
     <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.75"
-      strokeLinecap="square"
+      strokeLinecap="round"
       aria-hidden
     >
-      <path d="M3.5 3.5l11 11M14.5 3.5l-11 11" />
+      <path d="M4 4l12 12M16 4l-12 12" />
     </svg>
   );
 }
@@ -106,7 +106,6 @@ function MoonIcon() {
   );
 }
 
-// Inline script to set theme before paint — avoids FOUC
 const themeBootScript = `
   (function() {
     try {
@@ -149,186 +148,185 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body>
-        <a href="#main" className="gk-skip-link">
+        <a href="#main" className="skip-link">
           Skip to main content
         </a>
-        <div className="page-shell">
-          <div className="relative flex min-h-screen flex-col">
-            <header className="border-b border-[var(--gk-border)] bg-[var(--gk-bg)]/80 backdrop-blur-sm sticky top-0 z-40">
-              <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8 md:py-5">
-                <NavLink
-                  to="/"
-                  className="flex items-center gap-3 group"
-                  aria-label="GateKeeper home"
-                >
-                  <div className="relative h-9 w-9 flex-shrink-0 border border-[var(--gk-border-strong)] bg-[var(--gk-bg-elev)]">
-                    <img
-                      src="/icon.png"
-                      alt=""
-                      className="gk-logo--dark absolute inset-1 h-7 w-7 object-contain"
-                    />
-                    <img
-                      src="/icon-dark.png"
-                      alt=""
-                      className="gk-logo--light absolute inset-1 h-7 w-7 object-contain"
-                    />
-                  </div>
-                  <span className="font-mono text-base font-bold tracking-tight text-[var(--gk-fg)]">
-                    GateKeeper
-                  </span>
-                </NavLink>
 
-                <nav
-                  className="hidden items-center gap-7 md:flex"
-                  aria-label="Main navigation"
+        <div className="relative flex min-h-screen flex-col">
+          <header className="sticky top-0 z-40 border-b border-white/10 bg-[var(--color-background)]/70 backdrop-blur-xl">
+            <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
+              <NavLink
+                to="/"
+                className="flex items-center gap-3 group"
+                aria-label="GateKeeper home"
+              >
+                <div className="relative h-9 w-9 flex-shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/5">
+                  <img
+                    src="/icon.png"
+                    alt=""
+                    className="logo-dark absolute inset-1 h-7 w-7 object-contain"
+                  />
+                  <img
+                    src="/icon-dark.png"
+                    alt=""
+                    className="logo-light absolute inset-1 h-7 w-7 object-contain"
+                  />
+                </div>
+                <span className="text-base font-semibold tracking-tight">
+                  GateKeeper
+                </span>
+              </NavLink>
+
+              <nav
+                className="hidden items-center gap-1 md:flex"
+                aria-label="Main navigation"
+              >
+                {NAV_ITEMS.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) =>
+                      `nav-link ${isActive ? "is-active" : ""}`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
+
+              <div className="flex items-center gap-2 md:gap-3">
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="btn btn-ghost btn-icon"
+                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
                 >
+                  {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+                </button>
+                <NavLink
+                  to="/contact"
+                  className="!hidden md:!inline-flex btn btn-primary"
+                >
+                  Talk to us
+                </NavLink>
+                <button
+                  type="button"
+                  className="md:hidden btn btn-ghost btn-icon"
+                  onClick={() => setMobileMenuOpen((o) => !o)}
+                  aria-label="Toggle navigation menu"
+                  aria-expanded={mobileMenuOpen}
+                  aria-controls="gk-mobile-nav"
+                >
+                  {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                </button>
+              </div>
+            </div>
+
+            {mobileMenuOpen && (
+              <nav
+                id="gk-mobile-nav"
+                className="border-t border-white/10 bg-[var(--color-background)]/80 backdrop-blur-xl md:hidden"
+                aria-label="Mobile navigation"
+              >
+                <div className="mx-auto w-full max-w-7xl px-5 py-3 flex flex-col gap-1">
                   {NAV_ITEMS.map((item) => (
                     <NavLink
                       key={item.to}
                       to={item.to}
                       end={item.end}
+                      onClick={() => setMobileMenuOpen(false)}
                       className={({ isActive }) =>
-                        `gk-nav-link ${isActive ? "is-active" : ""}`
+                        `nav-link ${isActive ? "is-active" : ""}`
                       }
                     >
                       {item.label}
                     </NavLink>
                   ))}
-                </nav>
-
-                <div className="flex items-center gap-2 md:gap-3">
-                  <button
-                    type="button"
-                    onClick={toggleTheme}
-                    className="gk-icon-btn"
-                    aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-                  >
-                    {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-                  </button>
                   <NavLink
                     to="/contact"
-                    className="!hidden md:!inline-flex gk-btn gk-btn--primary"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="btn btn-primary mt-3 w-full"
                   >
                     Talk to us
                   </NavLink>
-                  <button
-                    type="button"
-                    className="md:hidden gk-icon-btn"
-                    onClick={() => setMobileMenuOpen((o) => !o)}
-                    aria-label="Toggle navigation menu"
-                    aria-expanded={mobileMenuOpen}
-                    aria-controls="gk-mobile-nav"
-                  >
-                    {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-                  </button>
                 </div>
-              </div>
+              </nav>
+            )}
+          </header>
 
-              {mobileMenuOpen && (
-                <nav
-                  id="gk-mobile-nav"
-                  className="border-t border-[var(--gk-border)] bg-[var(--gk-bg-elev)] md:hidden"
-                  aria-label="Mobile navigation"
-                >
-                  <div className="mx-auto w-full max-w-7xl px-5 py-3 flex flex-col">
-                    {NAV_ITEMS.map((item) => (
+          <main id="main" className="flex-1">
+            <div className="mx-auto w-full max-w-7xl px-5 pb-24 pt-10 md:px-8 md:pt-16">
+              {children}
+            </div>
+          </main>
+
+          <footer className="border-t border-white/10 bg-[var(--color-background)]/40 backdrop-blur-md">
+            <div className="mx-auto w-full max-w-7xl px-5 md:px-8 py-10">
+              <div className="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
+                <div className="space-y-3">
+                  <span className="text-sm font-semibold tracking-tight">
+                    GateKeeper
+                  </span>
+                  <p className="text-sm text-white/60 max-w-md">
+                    Endpoint, network, and DNS protection for Windows, Linux,
+                    and Android. Built for security operations teams.
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50 mb-3">
+                    Product
+                  </p>
+                  <ul className="space-y-1.5 text-sm text-white/70">
+                    <li>
                       <NavLink
-                        key={item.to}
-                        to={item.to}
-                        end={item.end}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className={({ isActive }) =>
-                          `block border-b border-[var(--gk-border)] py-3 font-mono text-sm uppercase tracking-[0.1em] last:border-b-0 ${
-                            isActive
-                              ? "text-[var(--gk-highlight)]"
-                              : "text-[var(--gk-fg-muted)] hover:text-[var(--gk-fg)]"
-                          }`
-                        }
+                        to="/features"
+                        className="hover:text-[hsl(180_100%_50%)] transition-colors"
                       >
-                        {item.label}
+                        Features
                       </NavLink>
-                    ))}
-                    <NavLink
-                      to="/contact"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="gk-btn gk-btn--primary mt-4 w-full"
-                    >
-                      Talk to us
-                    </NavLink>
-                  </div>
-                </nav>
-              )}
-            </header>
-
-            <main id="main" className="flex-1">
-              <div className="mx-auto w-full max-w-7xl px-5 pb-24 pt-10 md:px-8 md:pt-16">
-                {children}
-              </div>
-            </main>
-
-            <footer className="border-t border-[var(--gk-border)] bg-[var(--gk-bg-elev)]/40">
-              <div className="mx-auto w-full max-w-7xl px-5 md:px-8 py-10">
-                <div className="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
-                  <div className="space-y-3">
-                    <span className="font-mono text-sm font-bold text-[var(--gk-fg)]">
-                      GateKeeper
-                    </span>
-                    <p className="text-sm text-[var(--gk-fg-muted)] max-w-md">
-                      Endpoint, network, and DNS protection for Windows, Linux,
-                      and Android. Built for security operations teams.
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="gk-eyebrow mb-3">Product</p>
-                    <ul className="space-y-1.5 text-sm text-[var(--gk-fg-muted)]">
-                      <li>
-                        <NavLink
-                          to="/features"
-                          className="hover:text-[var(--gk-accent)] transition-colors"
-                        >
-                          Features
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to="/contact"
-                          className="hover:text-[var(--gk-accent)] transition-colors"
-                        >
-                          Contact
-                        </NavLink>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <p className="gk-eyebrow mb-3">Platforms</p>
-                    <ul className="space-y-1.5 font-mono text-xs text-[var(--gk-fg-muted)]">
-                      <li className="flex items-center justify-between gap-3">
-                        <span>Windows</span>
-                        <span className="text-[var(--gk-accent)]">●</span>
-                      </li>
-                      <li className="flex items-center justify-between gap-3">
-                        <span>Linux</span>
-                        <span className="text-[var(--gk-accent)]">●</span>
-                      </li>
-                      <li className="flex items-center justify-between gap-3">
-                        <span>Android</span>
-                        <span className="text-[var(--gk-accent)]">●</span>
-                      </li>
-                    </ul>
-                  </div>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/contact"
+                        className="hover:text-[hsl(180_100%_50%)] transition-colors"
+                      >
+                        Contact
+                      </NavLink>
+                    </li>
+                  </ul>
                 </div>
 
-                <hr className="gk-rule mt-8" />
-
-                <div className="mt-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between font-mono text-xs text-[var(--gk-fg-dim)]">
-                  <p>GateKeeper Security Suite</p>
-                  <p>{new Date().getFullYear()}</p>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50 mb-3">
+                    Platforms
+                  </p>
+                  <ul className="space-y-1.5 text-sm text-white/70">
+                    <li className="flex items-center justify-between gap-3">
+                      <span>Windows</span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+                    </li>
+                    <li className="flex items-center justify-between gap-3">
+                      <span>Linux</span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+                    </li>
+                    <li className="flex items-center justify-between gap-3">
+                      <span>Android</span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
+                    </li>
+                  </ul>
                 </div>
               </div>
-            </footer>
-          </div>
+
+              <hr className="my-7 border-white/10" />
+
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs text-white/50">
+                <p>GateKeeper Security Suite</p>
+                <p>{new Date().getFullYear()}</p>
+              </div>
+            </div>
+          </footer>
         </div>
         <ScrollRestoration />
         <Scripts />
@@ -342,12 +340,12 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "ERR";
+  let message = "Error";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : `ERR ${error.status}`;
+    message = error.status === 404 ? "404" : `Error ${error.status}`;
     details =
       error.status === 404
         ? "The requested page could not be found."
@@ -359,15 +357,10 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
-      <p className="gk-eyebrow gk-eyebrow--accent">{"// system"}</p>
-      <h1 className="gk-display gk-display-lg mt-3 text-[var(--gk-fg)]">
-        {message}
-      </h1>
-      <p className="mt-4 text-base text-[var(--gk-fg-muted)] max-w-xl">
-        {details}
-      </p>
+      <h1 className="text-5xl font-semibold tracking-tight">{message}</h1>
+      <p className="mt-4 text-base text-white/70 max-w-xl">{details}</p>
       {stack && (
-        <pre className="mt-8 w-full overflow-x-auto border border-[var(--gk-border)] bg-[var(--gk-bg-elev)] p-4 font-mono text-xs text-[var(--gk-fg-muted)]">
+        <pre className="mt-8 w-full overflow-x-auto glass-card p-4 font-mono text-xs text-white/70">
           <code>{stack}</code>
         </pre>
       )}

@@ -148,21 +148,20 @@ const PLATFORM_CHIPS = [
 
 export default function Features() {
   return (
-    <div className="space-y-28 md:space-y-36">
+    <div className="space-y-24 md:space-y-32">
       {/* ── HEADER ───────────────────────────────────────── */}
-      <section className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-        <div className="space-y-7 gk-reveal">
-          <span className="gk-status">
-            <span>Features</span>
+      <section className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="space-y-6 reveal">
+          <span className="status-badge">
+            <span className="status-badge__dot" />
+            Features
           </span>
-          <h1 className="gk-display gk-display-lg text-[var(--gk-fg)]">
+          <h1 className="text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight">
             Six modules.
             <br />
-            <span className="text-[var(--gk-fg-muted)]">
-              One dashboard.
-            </span>
+            <span className="headline-gradient">One dashboard.</span>
           </h1>
-          <p className="max-w-xl text-base text-[var(--gk-fg-muted)] leading-relaxed">
+          <p className="max-w-xl text-base md:text-lg text-white/70 leading-relaxed">
             Each module has its own focused workflow and feeds telemetry into
             the command center.
           </p>
@@ -170,7 +169,7 @@ export default function Features() {
             {PLATFORM_CHIPS.map((p) => (
               <span
                 key={p.name}
-                className="flex items-center gap-2 border border-[var(--gk-border)] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-[var(--gk-fg-muted)]"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70"
               >
                 <img src={p.src} alt="" className="h-4 w-4 object-contain" />
                 {p.name}
@@ -179,15 +178,15 @@ export default function Features() {
           </div>
         </div>
 
-        <div className="gk-surface gk-reveal gk-reveal-1">
-          <div className="flex items-center justify-between border-b border-[var(--gk-border)] px-4 py-2.5 font-mono text-[11px] text-[var(--gk-fg-muted)] uppercase tracking-[0.12em]">
+        <div className="reveal reveal-1 glass-panel overflow-hidden">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5 text-xs text-white/60">
             <span className="flex items-center gap-2">
-              <span className="text-[var(--gk-highlight)]">●</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_8px_hsl(180_100%_50%)]" />
               Command center
             </span>
-            <span>Preview</span>
+            <span className="text-white/40">Preview</span>
           </div>
-          <div className="bg-[var(--gk-bg)]">
+          <div className="bg-black/20">
             <img
               src="/screenshots/Dashboard-Dark.png"
               alt="GateKeeper command center dashboard in dark mode"
@@ -206,12 +205,14 @@ export default function Features() {
 
       {/* ── MODULES IN DEPTH ──────────────────────────────── */}
       <section className="space-y-10">
-        <div className="border-t border-[var(--gk-border)] pt-8 space-y-3 max-w-3xl">
-          <p className="gk-eyebrow gk-eyebrow--accent">Modules</p>
-          <h2 className="gk-display gk-display-md text-[var(--gk-fg)] leading-[1.1]">
+        <div className="border-t border-white/10 pt-10 space-y-3 max-w-3xl">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+            Modules
+          </p>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
             The six modules in detail.
           </h2>
-          <p className="text-sm md:text-base text-[var(--gk-fg-muted)] leading-relaxed max-w-2xl">
+          <p className="text-sm md:text-base text-white/70 leading-relaxed max-w-2xl">
             Each module has a focused UI; the dashboard keeps telemetry and
             policy state aligned.
           </p>
@@ -223,41 +224,44 @@ export default function Features() {
             return (
               <article
                 key={module.title}
-                className="border-t border-[var(--gk-border)] pt-10"
+                className="glass-panel p-7 md:p-8"
               >
                 <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-                  <div
-                    className={`space-y-5 ${isReversed ? "lg:order-2" : ""}`}
-                  >
-                    <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em]">
-                      <span className="text-[var(--gk-highlight)]">
+                  <div className={`space-y-5 ${isReversed ? "lg:order-2" : ""}`}>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
                         {module.kicker}
                       </span>
-                      <span className="ml-auto text-[var(--gk-fg-muted)] border border-[var(--gk-border)] px-2 py-0.5 normal-case tracking-normal">
+                      <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-white/60">
                         {module.scope}
                       </span>
                     </div>
-                    <h3 className="gk-display gk-display-md text-[var(--gk-fg)]">
+                    <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                       {module.title}
                     </h3>
-                    <p className="text-sm md:text-base text-[var(--gk-fg-muted)] leading-relaxed max-w-xl">
+                    <p className="text-sm md:text-base text-white/70 leading-relaxed max-w-xl">
                       {module.description}
                     </p>
-                    <ul className="gk-list pt-1">
+                    <ul className="space-y-3 pt-1">
                       {module.points.map((item) => (
-                        <li key={item} className="gk-list__item">
-                          <span className="gk-list__bullet">[+]</span>
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-sm text-white/70"
+                        >
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div
-                    className={`gk-surface ${isReversed ? "lg:order-1" : ""}`}
+                    className={`overflow-hidden rounded-xl border border-white/10 bg-black/20 ${
+                      isReversed ? "lg:order-1" : ""
+                    }`}
                   >
-                    <div className="border-b border-[var(--gk-border)] px-3 py-2 font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--gk-fg-dim)] flex items-center justify-between">
+                    <div className="border-b border-white/10 px-3 py-2 flex items-center justify-between text-[11px] text-white/50">
                       <span>{module.title}</span>
-                      <span className="text-[var(--gk-highlight)]">●</span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
                     </div>
                     <img
                       src={module.screenshotDark}
@@ -285,35 +289,40 @@ export default function Features() {
 
       {/* ── PLATFORM ROLLOUTS ─────────────────────────────── */}
       <section>
-        <div className="border-t border-[var(--gk-border)] pt-8 space-y-3 max-w-3xl">
-          <p className="gk-eyebrow gk-eyebrow--accent">Platforms</p>
-          <h2 className="gk-display gk-display-md text-[var(--gk-fg)] leading-[1.1]">
+        <div className="border-t border-white/10 pt-10 space-y-3 max-w-3xl">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+            Platforms
+          </p>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
             Coverage per platform.
           </h2>
-          <p className="text-sm md:text-base text-[var(--gk-fg-muted)] leading-relaxed max-w-2xl">
+          <p className="text-sm md:text-base text-white/70 leading-relaxed max-w-2xl">
             Each platform adapts policy for its environment while keeping a
             unified control surface.
           </p>
         </div>
 
-        <div className="grid gap-px bg-[var(--gk-border)] md:grid-cols-3 mt-10 border border-[var(--gk-border)]">
+        <div className="grid gap-6 md:grid-cols-3 mt-10">
           {platformColumns.map((p) => (
-            <article key={p.title} className="gk-card p-6 md:p-8">
+            <article key={p.title} className="glass-card p-7">
               <img
                 src={`/${p.title.toLowerCase()}.png`}
                 alt=""
-                className="h-6 w-6 object-contain"
+                className="h-7 w-7 object-contain"
               />
-              <h3 className="mt-6 font-mono text-2xl font-bold text-[var(--gk-fg)]">
+              <h3 className="mt-5 text-2xl font-semibold tracking-tight">
                 {p.title}
               </h3>
-              <p className="mt-3 text-sm text-[var(--gk-fg-muted)] leading-relaxed">
+              <p className="mt-3 text-sm text-white/70 leading-relaxed">
                 {p.summary}
               </p>
-              <ul className="gk-list mt-5">
+              <ul className="mt-5 space-y-3">
                 {p.highlights.map((item) => (
-                  <li key={item} className="gk-list__item">
-                    <span className="gk-list__bullet">[+]</span>
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 text-sm text-white/70"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[hsl(180_100%_50%)] shadow-[0_0_6px_hsl(180_100%_50%)]" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -324,22 +333,30 @@ export default function Features() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────── */}
-      <section className="gk-card gk-card--accent p-8 md:p-12">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <section className="glass-panel p-8 md:p-12 relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-50"
+          style={{
+            background:
+              "radial-gradient(circle at 30% 50%, rgba(0, 243, 255, 0.12), transparent 50%), radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.10), transparent 50%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="gk-eyebrow gk-eyebrow--accent">
-              {"// walkthrough"}
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[hsl(180_100%_50%)]">
+              Walkthrough
             </p>
-            <h2 className="mt-3 gk-display gk-display-md text-[var(--gk-fg)]">
+            <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
               Want a walkthrough?
             </h2>
-            <p className="mt-3 text-sm text-[var(--gk-fg-muted)] max-w-md">
+            <p className="mt-3 text-sm text-white/70 max-w-md">
               Tell us about your environment and we can tailor the demo.
             </p>
           </div>
-          <Link to="/contact" className="gk-btn gk-btn--primary self-start">
-            <span className="gk-bracket">{"[>]"}</span>
+          <Link to="/contact" className="btn btn-primary self-start">
             Get in touch
+            <span aria-hidden>→</span>
           </Link>
         </div>
       </section>
