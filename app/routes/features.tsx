@@ -3,14 +3,18 @@ import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "GateKeeper | Features" },
+    { title: "GateKeeper // Features" },
     {
       name: "description",
       content:
         "Explore GateKeeper modules for AppGate, NetGate, WebGate, AI assistance, and cross-platform controls.",
     },
-    { property: "og:title", content: "GateKeeper | Features" },
-    { property: "og:description", content: "Explore GateKeeper modules for AppGate, NetGate, WebGate, AI assistance, and cross-platform controls." },
+    { property: "og:title", content: "GateKeeper // Features" },
+    {
+      property: "og:description",
+      content:
+        "Explore GateKeeper modules for AppGate, NetGate, WebGate, AI assistance, and cross-platform controls.",
+    },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ];
@@ -24,11 +28,11 @@ const moduleShowcase = [
     screenshotDark: "/screenshots/Dashboard-Dark.png",
     screenshotLight: "/screenshots/Dashboard-Light.png",
     description:
-      "The command center unifies visibility across AppGate, NetGate, and WebGate with live telemetry, alerts, and health checks.",
+      "The command center unifies visibility across AppGate, NetGate, and WebGate with telemetry, alerts, and module health.",
     points: [
-      "Real-time module health and incident status",
+      "Module health and incident status",
       "Unified policy timeline with export-ready views",
-      "Live operational metrics across regions",
+      "Operational metrics across regions",
     ],
   },
   {
@@ -38,7 +42,7 @@ const moduleShowcase = [
     screenshotDark: "/screenshots/AppGate-Dark.png",
     screenshotLight: "/screenshots/AppGate-Light.png",
     description:
-      "AppGate gives security teams per-application enforcement so every executable receives a clear allow, deny, or review path.",
+      "Per-application enforcement so every executable receives a clear allow, deny, or review path — with the audit trail to back it.",
     points: [
       "Granular process controls with audit trails",
       "Signed-binary verification for trusted apps",
@@ -52,9 +56,9 @@ const moduleShowcase = [
     screenshotDark: "/screenshots/NetGate-Dark.png",
     screenshotLight: "/screenshots/NetGate-Light.png",
     description:
-      "NetGate makes network policy readable by humans while staying strict on ports, IP ranges, and protocol intent.",
+      "Network policy that's readable by humans yet strict on ports, IP ranges, and protocol intent.",
     points: [
-      "Threat intel feeds mapped to policy rules",
+      "Threat-intel feeds mapped to policy rules",
       "Inbound and outbound controls with tagging",
       "Prebuilt templates for regulated traffic",
     ],
@@ -66,7 +70,7 @@ const moduleShowcase = [
     screenshotDark: "/screenshots/WebGate-Dark.png",
     screenshotLight: "/screenshots/WebGate-Light.png",
     description:
-      "WebGate blocks risky domains at the DNS layer, keeping every browser and app aligned with safe browsing policy.",
+      "Block risky domains at the DNS layer — every browser, every app, aligned with your safe-browsing policy.",
     points: [
       "DNS sinkhole and threat category filters",
       "Policy staging for new block lists",
@@ -80,17 +84,17 @@ const moduleShowcase = [
     screenshotDark: "/screenshots/AI Assistant-Dark.png",
     screenshotLight: "/screenshots/AI Assistant-Light.png",
     description:
-      "The assistant translates requests into policy actions, explains impact, and keeps reviews aligned with compliance teams.",
+      "Draft and explain firewall changes in plain language; keep reviews aligned with compliance.",
     points: [
-      "Natural language rule creation",
+      "Natural-language rule drafts",
       "Impact previews before deployment",
       "Change summaries for audit review",
     ],
   },
   {
     title: "Sandbox",
-    kicker: "Windows only",
-    scope: "Windows",
+    kicker: "Windows isolation",
+    scope: "Windows only",
     screenshotDark: "/screenshots/Sandbox-Dark.png",
     screenshotLight: "/screenshots/Sandbox-Light.png",
     description:
@@ -129,123 +133,132 @@ const platformColumns = [
     summary:
       "Mobile protection that keeps core modules and permissions aligned on the go.",
     highlights: [
-      "WebGate safe browsing enforcement",
+      "WebGate safe-browsing enforcement",
       "App-level access controls",
       "Hardware permission management",
     ],
   },
 ];
 
+const PLATFORM_CHIPS = [
+  { name: "Windows", src: "/windows.png" },
+  { name: "Linux", src: "/linux.png" },
+  { name: "Android", src: "/android.png" },
+];
+
 export default function Features() {
   return (
-    <div className="space-y-20">
-      <section className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div className="space-y-6 fade-up">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-300">
-            Feature map
-          </p>
-          <h1 className="font-display text-3xl text-white md:text-4xl">
-            Command Center clarity, backed by purpose-built modules.
+    <div className="space-y-28 md:space-y-36">
+      {/* ── HEADER ───────────────────────────────────────── */}
+      <section className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+        <div className="space-y-7 gk-reveal">
+          <span className="gk-status">
+            <span>Features</span>
+          </span>
+          <h1 className="gk-display gk-display-lg text-[var(--gk-fg)]">
+            Six modules.
+            <br />
+            <span className="text-[var(--gk-fg-muted)]">
+              One dashboard.
+            </span>
           </h1>
-          <p className="max-w-2xl text-base text-white/70">
-            GateKeeper delivers precise controls for apps, networks, and DNS,
-            then unifies them inside a single operations dashboard.
+          <p className="max-w-xl text-base text-[var(--gk-fg-muted)] leading-relaxed">
+            Each module has its own focused workflow and feeds telemetry into
+            the command center.
           </p>
-          <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
-            {[
-              { name: "Windows", src: "/windows.png" },
-              { name: "Linux", src: "/linux.png" },
-              { name: "Android", src: "/android.png" },
-            ].map((platform) => (
+          <div className="flex flex-wrap gap-2 pt-2">
+            {PLATFORM_CHIPS.map((p) => (
               <span
-                key={platform.name}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5"
+                key={p.name}
+                className="flex items-center gap-2 border border-[var(--gk-border)] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-[var(--gk-fg-muted)]"
               >
-                <img
-                  src={platform.src}
-                  alt={`${platform.name} logo`}
-                  className="h-4 w-4 object-contain"
-                />
-                {platform.name}
+                <img src={p.src} alt="" className="h-4 w-4 object-contain" />
+                {p.name}
               </span>
             ))}
           </div>
         </div>
-        <div className="glass-panel rounded-3xl p-6 fade-up delay-1">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold text-white">
-              Command Center preview
-            </p>
-            <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-xs font-semibold text-emerald-200">
-              Live
+
+        <div className="gk-surface gk-reveal gk-reveal-1">
+          <div className="flex items-center justify-between border-b border-[var(--gk-border)] px-4 py-2.5 font-mono text-[11px] text-[var(--gk-fg-muted)] uppercase tracking-[0.12em]">
+            <span className="flex items-center gap-2">
+              <span className="text-[var(--gk-highlight)]">●</span>
+              Command center
             </span>
+            <span>Preview</span>
           </div>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+          <div className="bg-[var(--gk-bg)]">
             <img
               src="/screenshots/Dashboard-Dark.png"
               alt="GateKeeper command center dashboard in dark mode"
               className="screenshot-image screenshot-dark"
+              loading="eager"
             />
             <img
               src="/screenshots/Dashboard-Light.png"
               alt="GateKeeper command center dashboard in light mode"
               className="screenshot-image screenshot-light"
+              loading="eager"
             />
           </div>
-          <p className="mt-4 text-xs text-white/60">
-            Real-time security operations with module health and telemetry.
-          </p>
         </div>
       </section>
 
-      <section className="space-y-8">
-        <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-300">
-            Modules in depth
-          </p>
-          <h2 className="text-2xl font-semibold text-white">
-            Purpose-built modules, each with a dedicated workflow.
+      {/* ── MODULES IN DEPTH ──────────────────────────────── */}
+      <section className="space-y-10">
+        <div className="border-t border-[var(--gk-border)] pt-8 space-y-3 max-w-3xl">
+          <p className="gk-eyebrow gk-eyebrow--accent">Modules</p>
+          <h2 className="gk-display gk-display-md text-[var(--gk-fg)] leading-[1.1]">
+            The six modules in detail.
           </h2>
-          <p className="max-w-2xl text-sm text-white/70">
-            Every module ships with a focused UI, and the dashboard keeps
-            telemetry and policy status aligned across the stack.
+          <p className="text-sm md:text-base text-[var(--gk-fg-muted)] leading-relaxed max-w-2xl">
+            Each module has a focused UI; the dashboard keeps telemetry and
+            policy state aligned.
           </p>
         </div>
-        <div className="space-y-6">
+
+        <div className="space-y-12 md:space-y-20">
           {moduleShowcase.map((module, index) => {
             const isReversed = index % 2 === 1;
             return (
-              <div key={module.title} className="glass-panel rounded-3xl p-8">
-                <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-                  <div className={`space-y-4 ${isReversed ? "lg:order-2" : ""}`}>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
+              <article
+                key={module.title}
+                className="border-t border-[var(--gk-border)] pt-10"
+              >
+                <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+                  <div
+                    className={`space-y-5 ${isReversed ? "lg:order-2" : ""}`}
+                  >
+                    <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em]">
+                      <span className="text-[var(--gk-highlight)]">
                         {module.kicker}
                       </span>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
+                      <span className="ml-auto text-[var(--gk-fg-muted)] border border-[var(--gk-border)] px-2 py-0.5 normal-case tracking-normal">
                         {module.scope}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-semibold text-white">
+                    <h3 className="gk-display gk-display-md text-[var(--gk-fg)]">
                       {module.title}
                     </h3>
-                    <p className="text-sm text-white/70">
+                    <p className="text-sm md:text-base text-[var(--gk-fg-muted)] leading-relaxed max-w-xl">
                       {module.description}
                     </p>
-                    <ul className="space-y-3 text-sm text-white/70">
+                    <ul className="gk-list pt-1">
                       {module.points.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
-                          <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-300" />
+                        <li key={item} className="gk-list__item">
+                          <span className="gk-list__bullet">[+]</span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div
-                    className={`overflow-hidden rounded-2xl border border-white/10 bg-black/40 ${
-                      isReversed ? "lg:order-1" : ""
-                    }`}
+                    className={`gk-surface ${isReversed ? "lg:order-1" : ""}`}
                   >
+                    <div className="border-b border-[var(--gk-border)] px-3 py-2 font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--gk-fg-dim)] flex items-center justify-between">
+                      <span>{module.title}</span>
+                      <span className="text-[var(--gk-highlight)]">●</span>
+                    </div>
                     <img
                       src={module.screenshotDark}
                       alt={`${module.title} screenshot in dark mode`}
@@ -264,72 +277,71 @@ export default function Features() {
                     />
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
       </section>
 
-      <section className="space-y-6 py-12 md:py-16">
-        <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-300">
-            Platform coverage
-          </p>
-          <h2 className="text-2xl font-semibold text-white">
-            Platform-specific rollout plans, built from the same core modules.
+      {/* ── PLATFORM ROLLOUTS ─────────────────────────────── */}
+      <section>
+        <div className="border-t border-[var(--gk-border)] pt-8 space-y-3 max-w-3xl">
+          <p className="gk-eyebrow gk-eyebrow--accent">Platforms</p>
+          <h2 className="gk-display gk-display-md text-[var(--gk-fg)] leading-[1.1]">
+            Coverage per platform.
           </h2>
-          <p className="max-w-2xl text-sm text-white/70">
-            Each platform column highlights how GateKeeper adapts policies for
-            its environment while keeping a unified control surface.
-          </p>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
-            More modules coming soon
+          <p className="text-sm md:text-base text-[var(--gk-fg-muted)] leading-relaxed max-w-2xl">
+            Each platform adapts policy for its environment while keeping a
+            unified control surface.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {platformColumns.map((platform) => (
-            <div key={platform.title} className="glass-card rounded-3xl p-6">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                  <img
-                    src={`/${platform.title.toLowerCase()}.png`}
-                    alt={`${platform.title} logo`}
-                    className="h-6 w-6 object-contain"
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-white">
-                  {platform.title}
-                </h3>
-              </div>
-              <p className="mt-3 text-sm text-white/70">
-                {platform.summary}
+
+        <div className="grid gap-px bg-[var(--gk-border)] md:grid-cols-3 mt-10 border border-[var(--gk-border)]">
+          {platformColumns.map((p) => (
+            <article key={p.title} className="gk-card p-6 md:p-8">
+              <img
+                src={`/${p.title.toLowerCase()}.png`}
+                alt=""
+                className="h-6 w-6 object-contain"
+              />
+              <h3 className="mt-6 font-mono text-2xl font-bold text-[var(--gk-fg)]">
+                {p.title}
+              </h3>
+              <p className="mt-3 text-sm text-[var(--gk-fg-muted)] leading-relaxed">
+                {p.summary}
               </p>
-              <ul className="mt-5 space-y-3 text-sm text-white/70">
-                {platform.highlights.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-300" />
+              <ul className="gk-list mt-5">
+                {p.highlights.map((item) => (
+                  <li key={item} className="gk-list__item">
+                    <span className="gk-list__bullet">[+]</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="glass-panel flex flex-col items-start justify-between gap-4 rounded-3xl p-8 text-white md:flex-row md:items-center">
-        <div>
-          <h2 className="text-2xl font-semibold">See GateKeeper in action.</h2>
-          <p className="mt-2 text-sm text-white/70">
-            Share your environment and we will tailor a rollout plan.
-          </p>
+      {/* ── CTA ──────────────────────────────────────────── */}
+      <section className="gk-card gk-card--accent p-8 md:p-12">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="gk-eyebrow gk-eyebrow--accent">
+              {"// walkthrough"}
+            </p>
+            <h2 className="mt-3 gk-display gk-display-md text-[var(--gk-fg)]">
+              Want a walkthrough?
+            </h2>
+            <p className="mt-3 text-sm text-[var(--gk-fg-muted)] max-w-md">
+              Tell us about your environment and we can tailor the demo.
+            </p>
+          </div>
+          <Link to="/contact" className="gk-btn gk-btn--primary self-start">
+            <span className="gk-bracket">{"[>]"}</span>
+            Get in touch
+          </Link>
         </div>
-        <Link
-          to="/contact"
-          className="rounded-full bg-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950"
-        >
-          Book a walkthrough
-        </Link>
       </section>
     </div>
   );
